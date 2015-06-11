@@ -7,7 +7,12 @@ package gestionelectiva;
  */
 public class Usuario {
     /**
-     * 
+     * Atributo de nombre
      */
     public String nombre;
+    
+    /**
+     * Nombre para inicio de sesión
+     */
+    public String nickname;
 }
