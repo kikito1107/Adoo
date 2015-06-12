@@ -37,6 +37,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
         setResizable(false);
 
         titleTypeUser.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -122,16 +123,9 @@ public class IniciarSesion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
             if("Bienvenido Coordinador".equals(titleTypeUser.getText())){
-                //if( (inputUser.getText().equals("coordinadorEST")) && (inputPass.getText().equals("123456")) ){
-                    VentanaCoordinador ventanaCoordinador = new VentanaCoordinador();
-                    ventanaCoordinador.setVisible(true);
-                    this.dispose();
-                //}else{
-                //    JOptionPane.showMessageDialog( null , "Por favor verifica la dirección de correo o contraseña.");
-                           // + "\ncorreo: " + inputUser.getText()
-                           // + "\ncontraseña: " + inputPass.getText() );
-                //}
-                    
+                VentanaCoordinador ventanaCoordinador = new VentanaCoordinador();
+                ventanaCoordinador.setVisible(true);
+                this.dispose();
             }else{
                 VentanaEncargado ventanaEncargado = new VentanaEncargado();
                 ventanaEncargado.setVisible(true);
@@ -172,7 +166,7 @@ public class IniciarSesion extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new IniciarSesion().setVisible(true);
-            }
+                 }
         });
     }
 
