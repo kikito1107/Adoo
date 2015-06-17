@@ -5,9 +5,9 @@ package gestionelectiva;
  * @author Saul
  * Versión 1.0.0
  */
-public class Encargado extends Usuario{
+public class Maestro extends Usuario{
 
-    public Encargado() {
+    public Maestro() {
     }
     
 }

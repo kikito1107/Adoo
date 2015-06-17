@@ -19,7 +19,7 @@ public class Alumno {
     
     public Actividad actividad;
     
-    public Encargado encargado;
+    public Maestro encargado;
     //public int edad;
     public String escuela = "Escuela Superior de Turismo";
     
@@ -71,11 +71,11 @@ public class Alumno {
         this.actividad = actividad;
     }
 
-    public Encargado getEncargado() {
+    public Maestro getEncargado() {
         return encargado;
     }
 
-    public void setEncargado(Encargado encargado) {
+    public void setEncargado(Maestro encargado) {
         this.encargado = encargado;
     }
 

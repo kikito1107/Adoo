@@ -9,7 +9,7 @@ public class Actividad {
     
     public String nombre;
     
-    public Encargado encargado;
+    public Maestro encargado;
     
     public String getNombre(){
         return this.nombre;
