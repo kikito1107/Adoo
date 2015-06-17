@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gestionelectiva;
+package interfaces;
 import javax.swing.JOptionPane;
 import java.io.Serializable.*;
 import java.net.URL;
+import java.io.*;
 
 /**
  *
@@ -42,7 +43,7 @@ public class loginWindows extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         try {
-            jLabel7 =(javax.swing.JLabel)java.beans.Beans.instantiate(getClass().getClassLoader(), "gestionelectiva.loginWindows_jLabel7");
+            jLabel7 =(javax.swing.JLabel)java.beans.Beans.instantiate(getClass().getClassLoader(), "interfaces.loginWindows_jLabel7");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (java.io.IOException e) {
