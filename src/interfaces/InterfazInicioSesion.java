@@ -135,7 +135,7 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Por el momento no se puede acceder, espere un momento.");
             }
         }catch(Exception e){
-            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(null, "Por el momento no se puede acceder, espere un momento." + e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

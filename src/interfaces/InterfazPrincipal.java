@@ -270,7 +270,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         InterfazInicioSesion ventanaS = new InterfazInicioSesion();
         ventanaS.setVisible(true);
         InterfazInicioSesion.titleTypeUser.setText("Bienvenido Coordinador");
-        //this.dispose();
+        this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de coordinador, espere un momento.");
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -282,7 +282,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         InterfazInicioSesion ventanaS = new InterfazInicioSesion();
         ventanaS.setVisible(true);
         InterfazInicioSesion.titleTypeUser.setText("Bienvenido Maestro");
-        //this.dispose();
+        this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de encargado, espere un momento.");
     }//GEN-LAST:event_jButton2ActionPerformed
 
