@@ -15,12 +15,12 @@ import java.io.*;
  *
  * @author marcos
  */
-public class Principal extends javax.swing.JFrame {
+public class InterfazPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form loginWindows
      */
-    public Principal() {
+    public InterfazPrincipal() {
         initComponents();
     }
 
@@ -145,7 +145,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel14.setText("Coordinador");
 
         jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel15.setText("Encargado");
+        jLabel15.setText("Maestro");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -267,9 +267,9 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        IniciarSesion ventanaS = new IniciarSesion();
+        InterfazInicioSesion ventanaS = new InterfazInicioSesion();
         ventanaS.setVisible(true);
-        IniciarSesion.titleTypeUser.setText("Bienvenido Coordinador");
+        InterfazInicioSesion.titleTypeUser.setText("Bienvenido Coordinador");
         //this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de coordinador, espere un momento.");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -279,9 +279,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_click
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IniciarSesion ventanaS = new IniciarSesion();
+        InterfazInicioSesion ventanaS = new InterfazInicioSesion();
         ventanaS.setVisible(true);
-        IniciarSesion.titleTypeUser.setText("Bienvenido Encargado");
+        InterfazInicioSesion.titleTypeUser.setText("Bienvenido Maestro");
         //this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de encargado, espere un momento.");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -303,21 +303,23 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Principal().setVisible(true);
+                new InterfazPrincipal().setVisible(true);
             }
         });
     }

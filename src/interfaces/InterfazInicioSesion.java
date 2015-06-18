@@ -11,11 +11,11 @@ import javax.swing.JOptionPane;
  *
  * @author Saul
  */
-public class IniciarSesion extends javax.swing.JFrame {
+public class InterfazInicioSesion extends javax.swing.JFrame {
     /** 
      * Creates new form IniciarSesion
      */
-    public IniciarSesion() {
+    public InterfazInicioSesion() {
         initComponents();
     }
 
@@ -123,12 +123,16 @@ public class IniciarSesion extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
             if("Bienvenido Coordinador".equals(titleTypeUser.getText())){
-                VentanaCoordinador ventanaCoordinador = new VentanaCoordinador();
+                InterfazCoordinador ventanaCoordinador = new InterfazCoordinador();
                 ventanaCoordinador.setVisible(true);
                 this.dispose();
-            }else{
-                VentanaEncargado ventanaEncargado = new VentanaEncargado();
+            }if("Bienvenido Maestro".equals(titleTypeUser.getText())){
+                InterfazMaestro ventanaEncargado = new InterfazMaestro();
                 ventanaEncargado.setVisible(true);
+                this.dispose();
+            }else{
+                this.dispose();
+                JOptionPane.showMessageDialog(null, "Por el momento no se puede acceder, espere un momento.");
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -152,20 +156,21 @@ public class IniciarSesion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazInicioSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IniciarSesion().setVisible(true);
+                new InterfazInicioSesion().setVisible(true);
                  }
         });
     }
