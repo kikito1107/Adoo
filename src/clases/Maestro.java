@@ -1,4 +1,4 @@
-package gestionelectiva;
+package clases;
 
 /**
  * Escuela Superior de Computo
