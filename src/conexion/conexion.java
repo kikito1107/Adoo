@@ -11,36 +11,73 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author enriqueramirezgonzalez
  */
 public class conexion {
-    Connection myConection;
-    Statement stSentencias;
-    ResultSet rsDatos;
-    PreparedStatement psPrepararSentencias;
+    /**
+     * Creacion de la conección
+     */
+    Connection Db = null;
     
-    public conexion() throws ClassNotFoundException, SQLException{
+    /**
+     * Estado de la respuesta
+     */
+    Statement DataRequest;
+    
+    /**
+     * Lo que regresa las sentencias de mysql
+     */
+    ResultSet Resultado;
+    /**
+     * Ruta de conecicon a base de datos
+     */
+    String url = "jdbc:mysql://127.0.0.1:8888/db_gestionElectiva";
+    
+    /**
+     * usuario de la base de datos
+     */
+    String usuario = "saul";
+    
+    /**
+     * Contraseña del usuario de la base de datos
+     */
+    String password = "123456";
+    
+    /**
+     * Método para crear la conección a base de datos
+     * @return 
+     */
+    public boolean Conexion(){
+        boolean a = false;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:Mysql://localhost/db_electiva";
-            myConection  = DriverManager.getConnection(url, "root", "123456789");
-            stSentencias = myConection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            Db = (Connection) DriverManager.getConnection(url, usuario, password);
+            a = true;
+        }catch(ClassNotFoundException error){
+            System.err.println("No se puede conectara a la base de datos" + error);
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, "Error en la contraseña");
         }
-        catch(ClassCastException ex){throw ex;}
-        catch(SQLException ex1){throw ex1;}
-            
-    }  
+        return a;
+    }
     
-    public ResultSet consulta(String sql)throws SQLException{
+    public int buscarUsuario(String user, String pass){
+        int b = 0;
+        
         try{
-            rsDatos = stSentencias.executeQuery(sql);
+            DataRequest = (Statement) Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select * from usuarios where nickname = '" + user + "' and password = md5('" + pass + "');");
+            while(Resultado.next()){
+                b++;
+            }
         }catch(SQLException ex){
-            throw ex;
+            System.out.println(ex + "buscaUsuarios");
         }
-       
-        return rsDatos;
-    } 
+        
+        return b;
+    }
 }
