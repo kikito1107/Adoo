@@ -278,6 +278,12 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_click
 
+    
+    
+    bnicsdncsdli<nlvbnlsvsv
+    
+    
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         InterfazInicioSesion ventanaS = new InterfazInicioSesion();
         ventanaS.setVisible(true);
