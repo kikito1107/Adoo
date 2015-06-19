@@ -35,7 +35,7 @@ public class conexion {
     /**
      * Ruta de conecicon a base de datos
      */
-    String url = "jdbc:mysql://127.0.0.1:8888/db_gestionElectiva";
+    String url = "jdbc:mysql://127.0.0.1:3306/db_gestionElectiva";
     
     /**
      * usuario de la base de datos
@@ -55,7 +55,7 @@ public class conexion {
         boolean a = false;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            Db = (Connection) DriverManager.getConnection(url, usuario, password);
+            Db = (Connection)DriverManager.getConnection(url, usuario, password);
             a = true;
         }catch(ClassNotFoundException error){
             System.err.println("No se puede conectara a la base de datos" + error);

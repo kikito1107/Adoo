@@ -135,12 +135,19 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        String usuario = inputUsuario.getText();
+        String usu = inputUsuario.getText();
         String pass = inputPassword.getText();
+        
         conexion obj = new conexion();
+        
         obj.Conexion();
-        int val = obj.buscarUsuario(usuario, pass);
-        if(val == 0){
+        
+        int val = obj.buscarUsuario(usu, pass);
+        if(val == 1){
+            JOptionPane.showMessageDialog(null, "funciona");
+        }
+        
+        /*if(val == 0){
             JOptionPane.showMessageDialog(null, "No se encontro el usuario, verifique sus datos");
         }else{
             if("Bienvenido Coordinador".equals(titleTypeUser.getText())){
@@ -155,7 +162,7 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
                 this.dispose();
                 JOptionPane.showMessageDialog(null, "Por el momento no se puede acceder, espere un momento.");
             }
-        }
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
