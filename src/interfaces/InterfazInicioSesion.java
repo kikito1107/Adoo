@@ -6,8 +6,13 @@
 package interfaces;
 
 import conexion.conexion;
+import java.security.MessageDigest;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author Saul
@@ -137,36 +142,40 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
         
         String usu = inputUsuario.getText();
         String pass = inputPassword.getText();
-        
         conexion obj = new conexion();
         
         obj.Conexion();
         
         int val = obj.buscarUsuario(usu, pass);
-        if(val == 1){
-            JOptionPane.showMessageDialog(null, "funciona");
-        }
         
-        /*if(val == 0){
+        if(val == 0){
             JOptionPane.showMessageDialog(null, "No se encontro el usuario, verifique sus datos");
         }else{
-            if("Bienvenido Coordinador".equals(titleTypeUser.getText())){
+            int valRoll = val;
+            
+            if(valRoll == 2 && "Bienvenido Coordinador".equals(titleTypeUser.getText())){
                 InterfazCoordinador ventanaCoordinador = new InterfazCoordinador();
                 ventanaCoordinador.setVisible(true);
                 this.dispose();
-            }if("Bienvenido Maestro".equals(titleTypeUser.getText())){
-                InterfazMaestro ventanaEncargado = new InterfazMaestro();
-                ventanaEncargado.setVisible(true);
-                this.dispose();
             }else{
-                this.dispose();
-                JOptionPane.showMessageDialog(null, "Por el momento no se puede acceder, espere un momento.");
+                if(valRoll == 3 && "Bienvenido Maestro".equals(titleTypeUser.getText())){
+                    InterfazMaestro ventanaEncargado = new InterfazMaestro();
+                    ventanaEncargado.setVisible(true);
+                    this.dispose();
+                }else{
+                    this.dispose();
+                    JOptionPane.showMessageDialog(null, "Al parecer el tipo de usuario es incorrecto\nvuelva a seleccionar.");
+                    InterfazPrincipal principal = new InterfazPrincipal();
+                    principal.setVisible(true);
+                }
             }
-        }*/
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          this.dispose();
+        this.dispose();
+        InterfazPrincipal principal = new InterfazPrincipal();
+        principal.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -204,7 +213,7 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
                  }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField inputPassword;
     private javax.swing.JTextField inputUsuario;

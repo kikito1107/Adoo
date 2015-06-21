@@ -5,54 +5,77 @@
  */
 package conexion;
 
-import java.sql.*;
-    
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author enriqueramirezgonzalez
  */
 public class conexion {
-    private static Connection conexion;
-    private static final String bd="db_gestionElectiva";
-    private static final String user="saul";
-    private static final String password="123456";
-    private static final String host="localhost";
-    private static final String server="jdbc:mysql://"+host+"/"+bd;
+    Connection Db = null;
+    Statement DataRequest;
+    ResultSet Resultado;
     
-     public static void main(String[] args) {
-        try {
+    String nombreBD="db_gestionElectiva";
+    String contrasena="123456";
+    String usuario1 ="saul";
+    String ruta="localhost";
+    String server = "jdbc:mysql://"+ ruta +"/"+ nombreBD;
+    
+    /**
+     * Método para crear la conección a base de datos
+     * @return 
+     */
+    public boolean Conexion(){
+        boolean a = false;
+        try{
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection(server,user,password);
-            System.out.println("Conexión a base de datos " + server + " ... OK");
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Error cargando el Driver MySQL JDBC ... FAIL");
-            //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            System.out.println("Imposible realizar conexion con " + server + " ... FAIL");
-            //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Db = (Connection) DriverManager.getConnection(server , usuario1, contrasena);
+            a = true;
+        }catch(ClassNotFoundException error){
+            JOptionPane.showMessageDialog(null, "Error en la conexion" + error);
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, "Error en el acceso a la base\n" +"\n"+ error.getCause() +"\n"+ error.getMessage() +"\n" + error.getSuppressed());
+        }
+        return a;
+    }
+    
+    public int buscarUsuario(String user, String pass){
+        int b = 0;
+        int roll = 0;
+        
+        try{
+            DataRequest = (Statement) Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select * from usuarios where nickname = '" + user + "' and password = '" + pass + "';");
+            while(Resultado.next()){
+                b++;
+                roll = obtenerRoll( Resultado.getString("roll"));
+            }
+        }catch(SQLException ex){
+            System.out.println(ex + "buscaUsuarios");
         }
         
-        //realizar consulta
-        try {
-            // Preparamos la consulta
-            Statement s = conexion.createStatement();
-            ResultSet rs = s.executeQuery ("select * from usuarios");
-            // Recorremos el resultado, mientras haya registros para leer, y escribimos el resultado en pantalla.
-            while (rs.next()){
-                System.out.println(rs);
-            }
-        } catch (SQLException ex) {
-            System.out.println("Imposible realizar consulta ... FAIL");
-            //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        return b + roll; 
+        //return c;
+    }
+    
+    /**
+     * Asignar un valor int a val
+     * @param roll
+     * @return 
+     */
+    public int obtenerRoll(String roll){
+        int c = 0;
+        if(roll.equalsIgnoreCase("admin")){
+            c = 1;
+        }if(roll.equals("maestro")){
+            c = 2;
         }
-        //desconectar
-        try {
-            conexion.close();
-            System.out.println("Cerrar conexion con "+server+" ... OK");
-        } catch (SQLException ex) {
-            System.out.println("Imposible cerrar conexion ... FAIL");
-            //Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        return c;
     }
 }

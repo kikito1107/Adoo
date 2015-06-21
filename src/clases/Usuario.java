@@ -15,4 +15,14 @@ public class Usuario {
      * Nombre para inicio de sesión
      */
     public String nickname;
+    
+    /**
+     * 
+     */
+    public String password;
+    
+    
+    
+    
+    
 }

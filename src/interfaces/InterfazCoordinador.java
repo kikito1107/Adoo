@@ -60,7 +60,7 @@ public class InterfazCoordinador extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        jLabel1.setText("Bienvenido coordinador");
+        jLabel1.setText("Bienvenido Coordinador");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
