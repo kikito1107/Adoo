@@ -5,7 +5,7 @@
  */
 package interfaces;
 
-import conexion.conexion;
+import conectar.Conectar;
 import java.security.MessageDigest;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -142,9 +142,8 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
         
         String usu = inputUsuario.getText();
         String pass = inputPassword.getText();
-        conexion obj = new conexion();
-        
-        obj.Conexion();
+        Conectar obj = new Conectar();
+        obj.conexion();
         
         int val = obj.buscarUsuario(usu, pass);
         

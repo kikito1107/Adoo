@@ -17,9 +17,57 @@ public class Usuario {
     public String nickname;
     
     /**
-     * 
+     * Contraseña del usuario
      */
     public String password;
+    
+    /**
+     * Devuelve el nombre
+     * @return 
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Asigna el nombre al objeto Usuario
+     * @param nombre 
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Devuelve el nickname
+     * @return 
+     */
+    public String getNickname() {
+        return nickname;
+    }
+
+    /**
+     * Asigna el nickname al objeto Usuario
+     * @param nickname 
+     */
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    /**
+     * Devuelve la contraseña
+     * @return 
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Asigna la contraseña al objeto Usuario
+     * @param password 
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
     
     

@@ -35,28 +35,26 @@ public class Usuarios implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
     
+    private Integer id;
     @Basic(optional = false)
     @Column(name = "nombre")
+    
     private String nombre;
     
     @Basic(optional = false)
     @Column(name = "nickname")
-    private String nickname;
     
+    private String nickname;
     @Basic(optional = false)
     @Column(name = "password")
     private String password;
-    
     @Basic(optional = false)
     @Column(name = "roll")
     private String roll;
-    
     @Basic(optional = false)
     @Column(name = "clabe_interna")
     private String clabeInterna;
-    
 
     public Usuarios() {
     }

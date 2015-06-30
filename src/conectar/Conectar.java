@@ -3,20 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexion;
+package conectar;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author enriqueramirezgonzalez
  */
-public class conexion {
+public class Conectar {
     Connection Db = null;
     Statement DataRequest;
     ResultSet Resultado;
@@ -31,7 +33,7 @@ public class conexion {
      * Método para crear la conección a base de datos
      * @return 
      */
-    public boolean Conexion(){
+    /*public boolean Conexion(){
         boolean a = false;
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -43,6 +45,21 @@ public class conexion {
             JOptionPane.showMessageDialog(null, "Error en el acceso a la base\n" +"\n"+ error.getCause() +"\n"+ error.getMessage() +"\n" + error.getSuppressed());
         }
         return a;
+    }*/
+    
+    public Connection conexion(){
+        //Connection Db = null;
+        boolean a = false;
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Db = (Connection) DriverManager.getConnection(server , usuario1, contrasena);
+            a = true;
+        }catch(ClassNotFoundException error){
+            JOptionPane.showMessageDialog(null, "Error en la conexion" + error);
+        }catch(SQLException error){
+            JOptionPane.showMessageDialog(null, "Error en el acceso a la base\n" +"\n"+ error.getCause() +"\n"+ error.getMessage() +"\n" + error.getSuppressed());
+        }
+        return Db;
     }
     
     public int buscarUsuario(String user, String pass){
@@ -50,8 +67,8 @@ public class conexion {
         int roll = 0;
         
         try{
-            DataRequest = (Statement) Db.createStatement();
-            Resultado = DataRequest.executeQuery("Select * from usuarios where nickname = '" + user + "' and password = '" + pass + "';");
+            DataRequest = Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select * from usuario where nickname = '" + user + "' and password = '" + pass + "';");
             while(Resultado.next()){
                 b++;
                 roll = obtenerRoll( Resultado.getString("roll"));
@@ -62,6 +79,26 @@ public class conexion {
         
         return b + roll; 
         //return c;
+    }
+    
+    public Object mostrarTalleres(){
+        try{
+            DataRequest = (Statement) Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select * from talleres");
+            ResultSetMetaData Result = Resultado.getMetaData();
+            int col = Result.getColumnCount();
+            DefaultTableModel modeloTalleres = new DefaultTableModel();
+            while(Resultado.next()){
+                String fila[] = new String[col];
+                for(int i = 0; i<col; i++){
+                    fila[i] = Resultado.getString(i+1);
+                    modeloTalleres.addRow(fila);
+                }
+            }
+        }catch(SQLException ex){
+            System.out.println(ex + "mostrarTalleres");
+        }
+        return null;
     }
     
     /**
