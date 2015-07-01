@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 package interfaces;
+import java.awt.Toolkit;
 import javax.swing.*;
 import javax.swing.JOptionPane;
 import java.io.Serializable.*;
 import java.net.URL;
 import java.io.*;
+import javax.swing.JComponent;
 
 
 /**
@@ -22,6 +24,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
      */
     public InterfazPrincipal() {
         initComponents();
+        //this.setAlwaysOnTop(true);
+        this.setResizable(false);
+        this.setVisible(true);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        
     }
 
     /**
@@ -77,7 +84,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         setTitle("Sistema Gestor de Creditos EST");
         setBackground(new java.awt.Color(255, 255, 255));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
-        setResizable(false);
+        setLocation(new java.awt.Point(0, 0));
+        setMinimumSize(new java.awt.Dimension(1100, 900));
         setType(java.awt.Window.Type.POPUP);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionelectiva/imagenes/ipn.png"))); // NOI18N
@@ -162,7 +170,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
+                .addGap(85, 85, 85)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel15)
@@ -213,7 +221,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
@@ -228,7 +236,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addGap(428, 428, 428)
                         .addComponent(jLabel7))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
+                        .addGap(280, 280, 280)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -251,9 +259,9 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9))
                     .addComponent(jLabel2))
-                .addGap(36, 36, 36)
+                .addGap(90, 90, 90)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,7 +278,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         InterfazInicioSesion ventanaS = new InterfazInicioSesion();
         ventanaS.setVisible(true);
         InterfazInicioSesion.titleTypeUser.setText("Bienvenido Coordinador");
-        this.dispose();
+        //this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de coordinador, espere un momento.");
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -285,7 +293,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         InterfazInicioSesion ventanaS = new InterfazInicioSesion();
         ventanaS.setVisible(true);
         InterfazInicioSesion.titleTypeUser.setText("Bienvenido Maestro");
-        this.dispose();
+        //this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de encargado, espere un momento.");
     }//GEN-LAST:event_jButton2ActionPerformed
 

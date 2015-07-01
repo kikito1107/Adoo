@@ -156,11 +156,15 @@ public class InterfazInicioSesion extends javax.swing.JFrame {
                 InterfazCoordinador ventanaCoordinador = new InterfazCoordinador();
                 ventanaCoordinador.setVisible(true);
                 this.dispose();
+                InterfazPrincipal ventanaP = new InterfazPrincipal();
+                ventanaP.dispose();
             }else{
                 if(valRoll == 3 && "Bienvenido Maestro".equals(titleTypeUser.getText())){
                     InterfazMaestro ventanaEncargado = new InterfazMaestro();
                     ventanaEncargado.setVisible(true);
                     this.dispose();
+                    InterfazPrincipal ventanaP = new InterfazPrincipal();
+                    ventanaP.dispose();
                 }else{
                     this.dispose();
                     JOptionPane.showMessageDialog(null, "Al parecer el tipo de usuario es incorrecto\nvuelva a seleccionar.");
