@@ -22,6 +22,11 @@ public class Usuario {
     public String password;
     
     /**
+     * Rol del usuario 
+     */
+    public String roll;
+    
+    /**
      * Devuelve el nombre
      * @return 
      */

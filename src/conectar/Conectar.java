@@ -80,6 +80,22 @@ public class Conectar {
         return b + roll; 
         //return c;
     }
+     
+    public int obtenerUserId(String nombre, String nickname){
+        int id = 0;
+        try{
+            DataRequest = Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select id from usuario where nickname = '" + nickname + "' and nombre = '" + nombre + "';");
+            while(Resultado.next()){
+                String id_user = Resultado.getString(1);
+                id = Integer.valueOf(id_user);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex + "buscaUsuarios");
+        }
+        
+        return id; 
+    }
     
     public Object mostrarTalleres(){
         try{

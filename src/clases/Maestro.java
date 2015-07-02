@@ -21,6 +21,32 @@ public class Maestro extends Usuario{
      * Numero interno del IPN como boleta
      */
     public String clabe_interna;
+
+    /**
+     * 
+     */
+    public int usuario_id;
+
+    public int getUsuario_id() {
+        return usuario_id;
+    }
+
+    public void setUsuario_id(int usuario_id) {
+        this.usuario_id = usuario_id;
+    }
+    
+    
+    /**
+     * 
+     * @param telefono
+     * @param correo
+     * @param clabe_interna 
+     */
+    public Maestro(String telefono, String correo, String clabe_interna) {
+        this.telefono = telefono;
+        this.correo = correo;
+        this.clabe_interna = clabe_interna;
+    }
     
     /**
      * 

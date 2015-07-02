@@ -7,9 +7,12 @@ package interfaces;
 
 import conectar.Conectar;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,13 +34,46 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
         
         initComponents();
         mostrarTalleres();
-        tablaTalleres.disable();
+        mostrarMaestros();
+        tablaTalleresEditable.setVisible(false);
+        jLabel6.setVisible(false);
         this.setResizable(false);
         this.setVisible(true);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         
     }
 
+    public void mostrarMaestros(){
+        int num = 0;
+        DefaultTableModel modeloMaestros = new DefaultTableModel();
+        modeloMaestros.addColumn("#");
+        modeloMaestros.addColumn("Nombre");
+        modeloMaestros.addColumn("Télefono");
+        modeloMaestros.addColumn("Correo");
+        
+        tablaMaestros.setModel(modeloMaestros);
+        
+        String []datosMaestros = new String [4];
+        
+        try{
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT nombre, telefono, correo FROM maestro, usuario where usuario.id = maestro.usuario_id");
+            //JOptionPane.showMessageDialog(null, rs);
+            while(rs.next()){
+                num++;
+                String numero = String.valueOf(num);
+                datosMaestros[0] = numero ;
+                datosMaestros[1] = rs.getString(1);
+                datosMaestros[2] = rs.getString(2);
+                datosMaestros[3] = rs.getString(3);
+                modeloMaestros.addRow(datosMaestros);
+            }
+            tablaMaestros.setModel(modeloMaestros);
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+    }
+    
     public void mostrarTalleres(){
         int num = 0;
         DefaultTableModel modeloTalleres = new DefaultTableModel();
@@ -49,26 +85,58 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
         modeloTalleres.addColumn("Lugar");
         modeloTalleres.addColumn("Observación");
         
-        
         tablaTalleres.setModel(modeloTalleres);
         
-        String []datosTalleres = new String [4];
+        String []datosTalleres = new String [8];
         try{
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM talleres");
+            //JOptionPane.showMessageDialog(null, rs);
             while(rs.next()){
                 num++;
                 String numero = String.valueOf(num);
+                int tipo = Integer.valueOf(rs.getString(6));
                 datosTalleres[0] = numero ;
                 datosTalleres[1] = rs.getString(2);
-                datosTalleres[2] = rs.getString(3);
-                datosTalleres[3] = rs.getString(4);
+                datosTalleres[2] = rs.getString(4);
+                datosTalleres[3] = rs.getString(5);
+                datosTalleres[4] = "aun no";//rs.getString(3);
+                datosTalleres[5] = rs.getString(3);
+                if(tipo == 1){
+                    datosTalleres[6] = "Electiva";
+                }else{
+                    datosTalleres[6] = " ";
+                }
                 modeloTalleres.addRow(datosTalleres);
             }
             tablaTalleres.setModel(modeloTalleres);
         }catch(SQLException ex){
             System.out.println(ex);
         }
+    }
+    
+    public void editarTaller(String numero, String taller, String horario, String dias, String profesor, String lugar, String observacion){
+        DefaultTableModel modeloTalleresEditable = new DefaultTableModel();
+        String []datosTalleres = new String [8];
+        
+        modeloTalleresEditable.addColumn("#");
+        modeloTalleresEditable.addColumn("Taller");
+        modeloTalleresEditable.addColumn("Horario");
+        modeloTalleresEditable.addColumn("Dias");
+        modeloTalleresEditable.addColumn("Profesor");
+        modeloTalleresEditable.addColumn("Lugar");
+        modeloTalleresEditable.addColumn("Observación");
+        
+        tablaTalleresEditable.setModel(modeloTalleresEditable);
+        
+        datosTalleres[0] = String.valueOf(numero);
+        datosTalleres[1] = taller;
+        datosTalleres[2] = horario;
+        datosTalleres[3] = dias;
+        datosTalleres[4] = profesor;//rs.getString(3);
+        datosTalleres[5] = lugar;
+        datosTalleres[6] = observacion;
+        modeloTalleresEditable.addRow(datosTalleres);
         
     }
     /**
@@ -93,9 +161,13 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaTalleresEditable = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jButton9 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaMaestros = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -149,11 +221,15 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tablaTalleres);
         if (tablaTalleres.getColumnModel().getColumnCount() > 0) {
             tablaTalleres.getColumnModel().getColumn(0).setResizable(false);
+            tablaTalleres.getColumnModel().getColumn(0).setHeaderValue("#");
+            tablaTalleres.getColumnModel().getColumn(1).setHeaderValue("Taller");
+            tablaTalleres.getColumnModel().getColumn(2).setHeaderValue("Horario");
+            tablaTalleres.getColumnModel().getColumn(3).setHeaderValue("Lugar");
         }
 
         jButton1.setText("Agregar");
 
-        jButton2.setText("Editar");
+        jButton2.setText("Modificar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -162,20 +238,45 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
 
         jButton3.setText("Imprimir lista");
 
+        tablaTalleresEditable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tablaTalleresEditable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tablaTalleresEditable);
+
+        jLabel6.setText("jLabel6");
+
+        jButton9.setText("Guardar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(107, Short.MAX_VALUE)
+                .addContainerGap(123, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3)
+                    .addComponent(jButton9)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2))))
+                        .addComponent(jLabel6)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3)))))
                 .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
@@ -184,17 +285,22 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addGap(7, 7, 7)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(0, 75, Short.MAX_VALUE))
+                .addComponent(jButton9)
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Talleres", jPanel1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaMaestros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -220,13 +326,18 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(2);
+        jScrollPane2.setViewportView(tablaMaestros);
+        if (tablaMaestros.getColumnModel().getColumnCount() > 0) {
+            tablaMaestros.getColumnModel().getColumn(0).setResizable(false);
+            tablaMaestros.getColumnModel().getColumn(0).setPreferredWidth(2);
         }
 
         jButton4.setText("Agregar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Eliminar");
 
@@ -430,8 +541,55 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        tablaTalleres.enable();
+        int fila = tablaTalleres.getSelectedRow();
+        tablaTalleresEditable.setVisible(true);
+        jLabel6.setVisible(true);
+        jLabel6.setText("Elemento a editar.");
+        if(fila>=0){
+            editarTaller(
+                    tablaTalleres.getValueAt(fila, 0).toString(),
+                    tablaTalleres.getValueAt(fila, 1).toString(),
+                    tablaTalleres.getValueAt(fila, 2).toString(),
+                    tablaTalleres.getValueAt(fila, 3).toString(),
+                    tablaTalleres.getValueAt(fila, 4).toString(),
+                    tablaTalleres.getValueAt(fila, 5).toString(),
+                    tablaTalleres.getValueAt(fila, 6).toString()
+                    );
+        }else{
+            JOptionPane.showMessageDialog(null,"No selecciono una fila");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        int obs;
+        if("Electiva".equals(tablaTalleresEditable.getValueAt(0,6))){
+            obs = 0;
+        }else{
+            obs = 1;
+        }
+        JOptionPane.showMessageDialog(null, tablaTalleresEditable.getValueAt(0,2));
+        try {
+            PreparedStatement pst = cn.prepareStatement("Update talleres SET nombre='"
+                    + tablaTalleresEditable.getValueAt(0, 1) +
+                    "', horario='" + tablaTalleresEditable.getValueAt(0, 2) +
+                    "', dias='" + tablaTalleresEditable.getValueAt(0, 3) +
+                    "', lugar='" + tablaTalleresEditable.getValueAt(0,5) +
+                    "', observacion='" + obs + "' WHERE id = " + tablaTalleresEditable.getValueAt(0,0)
+            );
+            pst.executeUpdate();
+            mostrarTalleres();
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfazCoordinador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        InterfazAgregarMaestro addMaestro = new InterfazAgregarMaestro();
+        addMaestro.setVisible(true);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,12 +639,14 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -495,12 +655,14 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable tablaMaestros;
     private javax.swing.JTable tablaTalleres;
+    private javax.swing.JTable tablaTalleresEditable;
     private java.util.List<interfaces.Talleres> talleresList;
     private java.util.List<interfaces.Talleres> talleresList1;
     private javax.persistence.Query talleresQuery;
