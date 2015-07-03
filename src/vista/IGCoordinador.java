@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package vista;
 
-import conectar.Conectar;
+import controlador.Conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,7 +22,7 @@ import javax.swing.table.TableModel;
  *
  * @author Saul
  */
-public final class InterfazCoordinador extends javax.swing.JFrame {
+public final class IGCoordinador extends javax.swing.JFrame {
 
     Conectar obj = new Conectar();
     Connection cn = obj.conexion();
@@ -30,7 +30,7 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
     /**
      * Creates new form ventanaCoordinador
      */
-    public InterfazCoordinador() {
+    public IGCoordinador() {
         
         initComponents();
         mostrarTalleres();
@@ -585,13 +585,13 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
             pst.executeUpdate();
             mostrarTalleres();
         } catch (SQLException ex) {
-            Logger.getLogger(InterfazCoordinador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IGCoordinador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        InterfazAgregarMaestro addMaestro = new InterfazAgregarMaestro();
+        IGAddMaestro addMaestro = new IGAddMaestro();
         addMaestro.setVisible(true);
         addMaestro.setUndecorated(false);
         
@@ -599,7 +599,7 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        InterfazAgregarTaller addTaller = new InterfazAgregarTaller();
+        IGAddTaller addTaller = new IGAddTaller();
         addTaller.setVisible(true);
         addTaller.setUndecorated(false);
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -621,14 +621,18 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGCoordinador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -637,7 +641,7 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazCoordinador().setVisible(true);
+                new IGCoordinador().setVisible(true);
             }
         });
     }
@@ -676,8 +680,8 @@ public final class InterfazCoordinador extends javax.swing.JFrame {
     private javax.swing.JTable tablaMaestros;
     private javax.swing.JTable tablaTalleres;
     private javax.swing.JTable tablaTalleresEditable;
-    private java.util.List<interfaces.Talleres> talleresList;
-    private java.util.List<interfaces.Talleres> talleresList1;
+    private java.util.List<vista.Talleres> talleresList;
+    private java.util.List<vista.Talleres> talleresList1;
     private javax.persistence.Query talleresQuery;
     private javax.persistence.Query talleresQuery1;
     // End of variables declaration//GEN-END:variables

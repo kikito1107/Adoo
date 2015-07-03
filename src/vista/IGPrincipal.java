@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
+package vista;
 import java.awt.Toolkit;
 import javax.swing.*;
 import javax.swing.JOptionPane;
@@ -17,12 +17,12 @@ import javax.swing.JComponent;
  *
  * @author marcos
  */
-public class InterfazPrincipal extends javax.swing.JFrame {
+public class IGPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form loginWindows
      */
-    public InterfazPrincipal() {
+    public IGPrincipal() {
         initComponents();
         //this.setAlwaysOnTop(true);
         this.setResizable(false);
@@ -52,7 +52,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
         try {
-            jLabel7 =(javax.swing.JLabel)java.beans.Beans.instantiate(getClass().getClassLoader(), "interfaces.loginWindows_jLabel7");
+            jLabel7 =(javax.swing.JLabel)java.beans.Beans.instantiate(getClass().getClassLoader(), "vista.loginWindows_jLabel7");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (java.io.IOException e) {
@@ -275,9 +275,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        InterfazInicioSesion ventanaS = new InterfazInicioSesion();
+        IGLogin ventanaS = new IGLogin();
         ventanaS.setVisible(true);
-        InterfazInicioSesion.titleTypeUser.setText("Bienvenido Coordinador");
+        IGLogin.titleTypeUser.setText("Bienvenido Coordinador");
+        ventanaS.setLocationRelativeTo(null);
+        ventanaS.setUndecorated(true);
         //this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de coordinador, espere un momento.");
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -290,9 +292,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
      * @param evt 
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        InterfazInicioSesion ventanaS = new InterfazInicioSesion();
+        IGLogin ventanaS = new IGLogin();
         ventanaS.setVisible(true);
-        InterfazInicioSesion.titleTypeUser.setText("Bienvenido Maestro");
+        IGLogin.titleTypeUser.setText("Bienvenido Maestro");
+        ventanaS.setLocationRelativeTo(null);
+        ventanaS.setUndecorated(true);
         //this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de encargado, espere un momento.");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -314,14 +318,18 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(IGPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -330,7 +338,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfazPrincipal().setVisible(true);
+                new IGPrincipal().setVisible(true);
             }
         });
     }

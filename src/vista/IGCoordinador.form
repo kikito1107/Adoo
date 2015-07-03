@@ -22,7 +22,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;interfaces.Talleres&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;vista.Talleres&gt;"/>
       </AuxValues>
     </Component>
     <Component class="javax.persistence.Query" name="talleresQuery1">
@@ -40,7 +40,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;interfaces.Talleres&gt;"/>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;vista.Talleres&gt;"/>
       </AuxValues>
     </Component>
   </NonVisualComponents>

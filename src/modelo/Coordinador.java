@@ -1,6 +1,6 @@
-package clases;
+package modelo;
 
-import conectar.Conectar;
+import controlador.Conectar;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 

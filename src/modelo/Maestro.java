@@ -1,4 +1,4 @@
-package clases;
+package modelo;
 
 /**
  * Escuela Superior de Computo
