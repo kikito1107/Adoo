@@ -1,6 +1,6 @@
 package modelo;
 
-import controlador.Conectar;
+import controlador.ConecionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
  */
 public class Coordinador extends Usuario{
     
-    Conectar obj = new Conectar();
+    ConecionBD obj = new ConecionBD();
     Connection cn = obj.conexion();
     
     /**

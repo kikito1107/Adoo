@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.Conectar;
+import controlador.ConecionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +24,7 @@ import javax.swing.table.TableModel;
  */
 public final class IGCoordinador extends javax.swing.JFrame {
 
-    Conectar obj = new Conectar();
+    ConecionBD obj = new ConecionBD();
     Connection cn = obj.conexion();
         
     /**

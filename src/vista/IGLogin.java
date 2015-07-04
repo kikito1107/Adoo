@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.Conectar;
+import controlador.ConecionBD;
 import java.awt.Color;
 import java.security.MessageDigest;
 import java.sql.ResultSet;
@@ -163,7 +163,7 @@ public class IGLogin extends javax.swing.JFrame {
         
         String usu = inputUsuario.getText();
         String pass = inputPassword.getText();
-        Conectar obj = new Conectar();
+        ConecionBD obj = new ConecionBD();
         obj.conexion();
         
         int val = obj.buscarUsuario(usu, pass);

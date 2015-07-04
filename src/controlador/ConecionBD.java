@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author enriqueramirezgonzalez
  */
-public class Conectar {
+public class ConecionBD {
     Connection Db = null;
     Statement DataRequest;
     ResultSet Resultado;
@@ -29,26 +29,7 @@ public class Conectar {
     String ruta="localhost";
     String server = "jdbc:mysql://"+ ruta +"/"+ nombreBD;
     
-    /**
-     * Método para crear la conección a base de datos
-     * @return 
-     */
-    /*public boolean Conexion(){
-        boolean a = false;
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Db = (Connection) DriverManager.getConnection(server , usuario1, contrasena);
-            a = true;
-        }catch(ClassNotFoundException error){
-            JOptionPane.showMessageDialog(null, "Error en la conexion" + error);
-        }catch(SQLException error){
-            JOptionPane.showMessageDialog(null, "Error en el acceso a la base\n" +"\n"+ error.getCause() +"\n"+ error.getMessage() +"\n" + error.getSuppressed());
-        }
-        return a;
-    }*/
-    
     public Connection conexion(){
-        //Connection Db = null;
         boolean a = false;
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -78,7 +59,6 @@ public class Conectar {
         }
         
         return b + roll; 
-        //return c;
     }
      
     public int obtenerUserId(String nombre, String nickname){
@@ -93,7 +73,6 @@ public class Conectar {
         }catch(SQLException ex){
             System.out.println(ex + "buscaUsuarios");
         }
-        
         return id; 
     }
     
@@ -117,11 +96,6 @@ public class Conectar {
         return null;
     }
     
-    /**
-     * Asignar un valor int a val
-     * @param roll
-     * @return 
-     */
     public int obtenerRoll(String roll){
         int c = 0;
         if(roll.equalsIgnoreCase("admin")){
