@@ -17,9 +17,9 @@ public class Alumno {
     
     public double horas;
     
-    public Actividad actividad;
+    public DTOTaller actividad;
     
-    public Maestro encargado;
+    public DTOMaestro encargado;
     //public int edad;
     public String escuela = "Escuela Superior de Turismo";
     
@@ -63,19 +63,19 @@ public class Alumno {
         this.horas = horas;
     }
 
-    public Actividad getActividad() {
+    public DTOTaller getActividad() {
         return actividad;
     }
 
-    public void setActividad(Actividad actividad) {
+    public void setActividad(DTOTaller actividad) {
         this.actividad = actividad;
     }
 
-    public Maestro getEncargado() {
+    public DTOMaestro getEncargado() {
         return encargado;
     }
 
-    public void setEncargado(Maestro encargado) {
+    public void setEncargado(DTOMaestro encargado) {
         this.encargado = encargado;
     }
 

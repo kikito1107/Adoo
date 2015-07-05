@@ -5,7 +5,7 @@
  */
 package vista;
 
-import controlador.ConecionBD;
+import controlador.ConexionBD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import modelo.DAOMaestro;
+import modelo.DAOTaller;
 
 /**
  *
@@ -24,41 +26,70 @@ import javax.swing.table.TableModel;
  */
 public final class IGCoordinador extends javax.swing.JFrame {
 
-    ConecionBD obj = new ConecionBD();
+    DAOMaestro daoMaestros = new DAOMaestro();
+    DAOTaller daoTalleres = new DAOTaller();
+    DefaultTableModel model = daoMaestros.mostrarMaestros();
+    ConexionBD obj = new ConexionBD();
     Connection cn = obj.conexion();
-        
+    PreparedStatement pstmt;
+    ResultSet rs;
+    
     /**
      * Creates new form ventanaCoordinador
      */
     public IGCoordinador() {
         
         initComponents();
-        mostrarTalleres();
-        mostrarMaestros();
+        initTablas();
         tablaTalleresEditable.setVisible(false);
         jLabel6.setVisible(false);
         this.setResizable(false);
         this.setVisible(true);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-        
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        tablaMaestros.setModel(daoMaestros.mostrarMaestros());
+        tablaTalleres.setModel(daoTalleres.mostrarTalleres());
     }
-
-    public void mostrarMaestros(){
-        int num = 0;
+    
+    public void initTablas(){
+        // Inicializamos Los datos de la tabla para edicion de talleres
+        DefaultTableModel modeloTalleresEditable = new DefaultTableModel();
+        modeloTalleresEditable.addColumn("#");
+        modeloTalleresEditable.addColumn("Taller");
+        modeloTalleresEditable.addColumn("Horario");
+        modeloTalleresEditable.addColumn("Dias");
+        modeloTalleresEditable.addColumn("Profesor");
+        modeloTalleresEditable.addColumn("Lugar");
+        modeloTalleresEditable.addColumn("Observación");
+        tablaTalleresEditable.setModel(modeloTalleresEditable);
+    }
+    public void editarTaller(String numero, String taller, String horario, String dias, String profesor, String lugar, String observacion){
+        DefaultTableModel modeloTalleresEditable = new DefaultTableModel();
+        tablaTalleresEditable.setModel(modeloTalleresEditable);
+        String []datosTalleres = new String [8];
+        datosTalleres[0] = String.valueOf(numero);
+        datosTalleres[1] = taller;
+        datosTalleres[2] = horario;
+        datosTalleres[3] = dias;
+        datosTalleres[4] = profesor;//rs.getString(3);
+        datosTalleres[5] = lugar;
+        datosTalleres[6] = observacion;
+        modeloTalleresEditable.addRow(datosTalleres);
+    }
+    
+    public DefaultTableModel mostrarMaestros(){
+        // Inicializamos la tabla de maestros
         DefaultTableModel modeloMaestros = new DefaultTableModel();
         modeloMaestros.addColumn("#");
         modeloMaestros.addColumn("Nombre");
         modeloMaestros.addColumn("Télefono");
         modeloMaestros.addColumn("Correo");
         
-        tablaMaestros.setModel(modeloMaestros);
-        
         String []datosMaestros = new String [4];
-        
+        int num = 0;
         try{
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT nombre, telefono, correo FROM maestro, usuario where usuario.id = maestro.usuario_id");
-            //JOptionPane.showMessageDialog(null, rs);
+            rs = st.executeQuery("SELECT nombre, telefono, correo FROM maestro, usuario where usuario.id = maestro.usuario_id");
+            JOptionPane.showMessageDialog(null, rs.getString(1));
             while(rs.next()){
                 num++;
                 String numero = String.valueOf(num);
@@ -68,76 +99,10 @@ public final class IGCoordinador extends javax.swing.JFrame {
                 datosMaestros[3] = rs.getString(3);
                 modeloMaestros.addRow(datosMaestros);
             }
-            tablaMaestros.setModel(modeloMaestros);
-        }catch(SQLException ex){
-            System.out.println(ex);
+            }catch(SQLException ex){
+                //JOptionPane.showMessageDialog(null, ex.getCause() + ex.getMessage()+ex.getSQLState());
         }
-    }
-    
-    public void mostrarTalleres(){
-        int num = 0;
-        DefaultTableModel modeloTalleres = new DefaultTableModel();
-        modeloTalleres.addColumn("#");
-        modeloTalleres.addColumn("Taller");
-        modeloTalleres.addColumn("Horario");
-        modeloTalleres.addColumn("Dias");
-        modeloTalleres.addColumn("Profesor");
-        modeloTalleres.addColumn("Lugar");
-        modeloTalleres.addColumn("Observación");
-        
-        tablaTalleres.setModel(modeloTalleres);
-        
-        String []datosTalleres = new String [8];
-        try{
-            Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM talleres");
-            //JOptionPane.showMessageDialog(null, rs);
-            while(rs.next()){
-                num++;
-                String numero = String.valueOf(num);
-                int tipo = Integer.valueOf(rs.getString(6));
-                datosTalleres[0] = numero ;
-                datosTalleres[1] = rs.getString(2);
-                datosTalleres[2] = rs.getString(4);
-                datosTalleres[3] = rs.getString(5);
-                datosTalleres[4] = "aun no";//rs.getString(3);
-                datosTalleres[5] = rs.getString(3);
-                if(tipo == 1){
-                    datosTalleres[6] = "Electiva";
-                }else{
-                    datosTalleres[6] = " ";
-                }
-                modeloTalleres.addRow(datosTalleres);
-            }
-            tablaTalleres.setModel(modeloTalleres);
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
-    }
-    
-    public void editarTaller(String numero, String taller, String horario, String dias, String profesor, String lugar, String observacion){
-        DefaultTableModel modeloTalleresEditable = new DefaultTableModel();
-        String []datosTalleres = new String [8];
-        
-        modeloTalleresEditable.addColumn("#");
-        modeloTalleresEditable.addColumn("Taller");
-        modeloTalleresEditable.addColumn("Horario");
-        modeloTalleresEditable.addColumn("Dias");
-        modeloTalleresEditable.addColumn("Profesor");
-        modeloTalleresEditable.addColumn("Lugar");
-        modeloTalleresEditable.addColumn("Observación");
-        
-        tablaTalleresEditable.setModel(modeloTalleresEditable);
-        
-        datosTalleres[0] = String.valueOf(numero);
-        datosTalleres[1] = taller;
-        datosTalleres[2] = horario;
-        datosTalleres[3] = dias;
-        datosTalleres[4] = profesor;//rs.getString(3);
-        datosTalleres[5] = lugar;
-        datosTalleres[6] = observacion;
-        modeloTalleresEditable.addRow(datosTalleres);
-        
+        return modeloMaestros;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -148,11 +113,6 @@ public final class IGCoordinador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityManager0 = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("db_gestionElectiva?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
-        talleresQuery = java.beans.Beans.isDesignTime() ? null : entityManager0.createQuery("SELECT t FROM Talleres t");
-        talleresList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : talleresQuery.getResultList();
-        talleresQuery1 = java.beans.Beans.isDesignTime() ? null : entityManager0.createQuery("SELECT t FROM Talleres t");
-        talleresList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : talleresQuery1.getResultList();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -192,40 +152,8 @@ public final class IGCoordinador extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Bienvenido Coordinador");
 
-        tablaTalleres.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "#", "Taller", "Horario", "Lugar"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         tablaTalleres.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaTalleres);
-        if (tablaTalleres.getColumnModel().getColumnCount() > 0) {
-            tablaTalleres.getColumnModel().getColumn(0).setResizable(false);
-            tablaTalleres.getColumnModel().getColumn(0).setHeaderValue("#");
-            tablaTalleres.getColumnModel().getColumn(1).setHeaderValue("Taller");
-            tablaTalleres.getColumnModel().getColumn(2).setHeaderValue("Horario");
-            tablaTalleres.getColumnModel().getColumn(3).setHeaderValue("Lugar");
-        }
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -305,37 +233,7 @@ public final class IGCoordinador extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Talleres", jPanel1);
 
-        tablaMaestros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "#", "Maestro", "Turno", "Clabe"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
         jScrollPane2.setViewportView(tablaMaestros);
-        if (tablaMaestros.getColumnModel().getColumnCount() > 0) {
-            tablaMaestros.getColumnModel().getColumn(0).setResizable(false);
-            tablaMaestros.getColumnModel().getColumn(0).setPreferredWidth(2);
-        }
 
         jButton4.setText("Agregar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -381,36 +279,14 @@ public final class IGCoordinador extends javax.swing.JFrame {
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "#", "Alumno", "Actividad", "Maestro", "Horas", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTable3.setPreferredSize(new java.awt.Dimension(253, 64));
         jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-            jTable3.getColumnModel().getColumn(0).setPreferredWidth(10);
-        }
 
         jButton6.setText("Generar formato de liberación");
 
@@ -567,26 +443,21 @@ public final class IGCoordinador extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        int obs;
+        /*int obs;
         if("Electiva".equals(tablaTalleresEditable.getValueAt(0,6))){
             obs = 0;
         }else{
             obs = 1;
         }
-        JOptionPane.showMessageDialog(null, tablaTalleresEditable.getValueAt(0,2));
-        try {
-            PreparedStatement pst = cn.prepareStatement("Update talleres SET nombre='"
-                    + tablaTalleresEditable.getValueAt(0, 1) +
-                    "', horario='" + tablaTalleresEditable.getValueAt(0, 2) +
-                    "', dias='" + tablaTalleresEditable.getValueAt(0, 3) +
-                    "', lugar='" + tablaTalleresEditable.getValueAt(0,5) +
-                    "', observacion='" + obs + "' WHERE id = " + tablaTalleresEditable.getValueAt(0,0)
-            );
-            pst.executeUpdate();
-            mostrarTalleres();
-        } catch (SQLException ex) {
-            Logger.getLogger(IGCoordinador.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        daoTalleres.editarTaller(
+                tablaTalleresEditable.getValueAt(0, 1), 
+                tablaTalleresEditable.getValueAt(0, 2), 
+                tablaTalleresEditable.getValueAt(0, 3), 
+                tablaTalleresEditable.getValueAt(0,5), 
+                null, 
+                null);
+        daoTalleres.mostrarTalleres();
+        */
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -647,7 +518,6 @@ public final class IGCoordinador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager entityManager0;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -680,9 +550,5 @@ public final class IGCoordinador extends javax.swing.JFrame {
     private javax.swing.JTable tablaMaestros;
     private javax.swing.JTable tablaTalleres;
     private javax.swing.JTable tablaTalleresEditable;
-    private java.util.List<vista.Talleres> talleresList;
-    private java.util.List<vista.Talleres> talleresList1;
-    private javax.persistence.Query talleresQuery;
-    private javax.persistence.Query talleresQuery1;
     // End of variables declaration//GEN-END:variables
 }

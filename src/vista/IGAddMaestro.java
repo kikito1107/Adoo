@@ -8,6 +8,9 @@ package vista;
 import modelo.Coordinador;
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import modelo.DAOMaestro;
+import modelo.DTOMaestro;
 
 /**
  *
@@ -15,6 +18,9 @@ import javax.swing.JFrame;
  */
 public class IGAddMaestro extends javax.swing.JFrame {
 
+    DTOMaestro dtoMaestro;
+    DAOMaestro daoMaestro = new DAOMaestro();
+    
     /**
      * Creates new form InterfazAgregarMaestro
      */
@@ -40,7 +46,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
         txtnick = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtpass = new javax.swing.JTextField();
-        txtclabe = new javax.swing.JTextField();
+        txtclave = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -79,7 +85,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
 
         txtpass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        txtclabe.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtclave.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Nombre");
@@ -90,7 +96,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
         jLabel3.setText("Nickname");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Clabe interna");
+        jLabel5.setText("Clave interna");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Datos de contacto");
@@ -138,7 +144,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtnick)
                             .addComponent(txtpass)
-                            .addComponent(txtclabe)
+                            .addComponent(txtclave)
                             .addComponent(txtname, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -180,7 +186,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
                     .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtclabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtclave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,8 +229,18 @@ public class IGAddMaestro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Coordinador nuevoUsuario = new Coordinador();
-        nuevoUsuario.agregarUsuario(txtname.getText(), txtnick.getText(), txtpass.getText(), "maestro", txtclabe.getText(), txttel.getText(), txtemail.getText());
+        String nombre = txtname.getText();
+        String nick = txtnick.getText();
+        String pass = txtpass.getText();
+        String rol = "maestro";
+        String clave = txtclave.getText();
+        String telefono = txttel.getText();
+        String email = txtemail.getText();
+        int id= 0;
+        dtoMaestro = new DTOMaestro(nombre, nick, pass, rol, telefono, email,clave);
+        //daoMaestro.agregarUsuario(dtoMaestro.getNombre(), dtoMaestro.getNickname(), dtoMaestro.getPassword(), dtoMaestro.getRol(), dtoMaestro.getClave(), dtoMaestro.getTelefono(), dtoMaestro.getCorreo(), id = 0);
+        daoMaestro.agregarUsuario(dtoMaestro);
+        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -283,7 +299,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField txtclabe;
+    private javax.swing.JTextField txtclave;
     private javax.swing.JTextField txtemail;
     private javax.swing.JTextField txtname;
     private javax.swing.JTextField txtnick;

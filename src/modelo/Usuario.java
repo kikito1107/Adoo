@@ -5,72 +5,48 @@ package modelo;
  * @author Saul
  * Versión 1.0.0
  */
-public class Usuario {
-    /**
-     * Atributo de nombre
-     */
-    public String nombre;
+abstract class Usuario {
     
-    /**
-     * Nombre para inicio de sesión
-     */
-    public String nickname;
+    protected String nombre;
+    protected String nickname;
+    protected String password;
+    protected String rol;
     
-    /**
-     * Contraseña del usuario
-     */
-    public String password;
-    
-    /**
-     * Rol del usuario 
-     */
-    public String roll;
-    
-    /**
-     * Devuelve el nombre
-     * @return 
-     */
+    public Usuario(String nombre, String nickname, String password, String rol){
+        this.nombre = nombre;
+        this.nickname = nickname;
+        this.password = password;
+        this.rol = rol;
+    }
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Asigna el nombre al objeto Usuario
-     * @param nombre 
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Devuelve el nickname
-     * @return 
-     */
     public String getNickname() {
         return nickname;
     }
 
-    /**
-     * Asigna el nickname al objeto Usuario
-     * @param nickname 
-     */
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
-    /**
-     * Devuelve la contraseña
-     * @return 
-     */
     public String getPassword() {
         return password;
     }
 
-    /**
-     * Asigna la contraseña al objeto Usuario
-     * @param password 
-     */
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author enriqueramirezgonzalez
  */
-public class ConecionBD {
+public class ConexionBD {
     Connection Db = null;
     Statement DataRequest;
     ResultSet Resultado;
