@@ -134,4 +134,24 @@ public class ConexionBD {
         }
         return model;
     }
+
+    public int obtenerIdMaestroLista(String nombre) {
+        Statement DataRequest1;
+        int id = 0;
+        try{
+            DataRequest = Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select id, nombre from usuario where nombre = '" + nombre + "';");
+            while(Resultado.next()){
+                DataRequest1 = Db.createStatement();
+                ResultSet Resultado1;
+                Resultado1 = DataRequest1.executeQuery("Select id from maestro where usuario_id = '" + Resultado.getInt(1) + "';");
+                while(Resultado1.next()){
+                    id = Resultado1.getInt(1);
+                }
+            }
+        }catch(SQLException ex){
+            System.out.println(ex + "buscaUsuarios");
+        }
+        return id; 
+    }
 }

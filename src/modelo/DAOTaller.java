@@ -24,8 +24,10 @@ public class DAOTaller {
     PreparedStatement pstmt;
     ResultSet rs;
    
-    public void agregarTaller(DTOTaller dtoTaller){
+    public void agregarTaller(DTOTaller dtoTaller, String maestro){
         int idTaller;
+        int idMaestro;
+        int idPeriodo = 1;
         DAOTaller daoTaller = new DAOTaller();
         try{
             pstmt = cn.prepareStatement("INSERT INTO talleres (nombre, lugar, horario, dias, observacion) VALUES (?,?,?,?,?)");
@@ -36,16 +38,24 @@ public class DAOTaller {
             pstmt.setInt(5, dtoTaller.getObservacion());
             pstmt.executeUpdate();
             idTaller = obj.obtenerIdTaller(dtoTaller.getNombre(), dtoTaller.getLugar(), dtoTaller.getHorario());
-            
-            JOptionPane.showMessageDialog(null, idTaller);
-            //asignarMaestro(idMaestro);
+            idMaestro = obj.obtenerIdMaestroLista(maestro);
+            asignarMaestro(idTaller,idMaestro,idPeriodo);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }     
     }
     
-    public void asignarMaestro(int id){
-        
+    public void asignarMaestro(int idTaller, int idMaestro, int idPeriodo){
+        try{
+            JOptionPane.showMessageDialog(null, idTaller +" "+ idPeriodo +" "+ idMaestro);
+            pstmt = cn.prepareStatement("INSERT INTO talleres_has_periodo (talleres_id, periodo_id, maestro_id) VALUES ("+idTaller+","+idPeriodo+","+idMaestro+")");
+            //pstmt.setInt(1, idTaller);
+            //pstmt.setInt(2, idMaestro);
+            //pstmt.setInt(3, idPeriodo);
+            pstmt.executeUpdate();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
     
     public DefaultTableModel mostrarTalleres(){
