@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,7 +21,32 @@ import javax.swing.table.DefaultTableModel;
 public class DAOTaller {
     ConexionBD obj = new ConexionBD();
     Connection cn = obj.conexion();
+    PreparedStatement pstmt;
+    ResultSet rs;
+   
+    public void agregarTaller(DTOTaller dtoTaller){
+        int idTaller;
+        DAOTaller daoTaller = new DAOTaller();
+        try{
+            pstmt = cn.prepareStatement("INSERT INTO talleres (nombre, lugar, horario, dias, observacion) VALUES (?,?,?,?,?)");
+            pstmt.setString(1, dtoTaller.getNombre());
+            pstmt.setString(2, dtoTaller.getLugar());
+            pstmt.setString(3, dtoTaller.getHorario());
+            pstmt.setString(4, dtoTaller.getDias());
+            pstmt.setInt(5, dtoTaller.getObservacion());
+            pstmt.executeUpdate();
+            idTaller = obj.obtenerIdTaller(dtoTaller.getNombre(), dtoTaller.getLugar(), dtoTaller.getHorario());
+            
+            JOptionPane.showMessageDialog(null, idTaller);
+            //asignarMaestro(idMaestro);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }     
+    }
     
+    public void asignarMaestro(int id){
+        
+    }
     
     public DefaultTableModel mostrarTalleres(){
         // Inicializamos la tabla de Talleres
@@ -37,7 +63,7 @@ public class DAOTaller {
         int num = 0;
         try{
             Statement st = cn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM talleres");
+            rs = st.executeQuery("SELECT * FROM talleres");
             while(rs.next()){
                 num++;
                 String numero = String.valueOf(num);
@@ -60,6 +86,7 @@ public class DAOTaller {
         }
         return modeloTalleres;
     }
+    
     
     /*public void editarTaller(String numero, String taller, String horario, String dias, String profesor, String lugar, String observacion){
     try {

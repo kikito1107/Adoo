@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -61,21 +62,6 @@ public class ConexionBD {
         return b + roll; 
     }
      
-    public int obtenerUserId(String nombre, String nickname){
-        int id = 0;
-        try{
-            DataRequest = Db.createStatement();
-            Resultado = DataRequest.executeQuery("Select id from usuario where nickname = '" + nickname + "' and nombre = '" + nombre + "';");
-            while(Resultado.next()){
-                String id_user = Resultado.getString(1);
-                id = Integer.valueOf(id_user);
-            }
-        }catch(SQLException ex){
-            System.out.println(ex + "buscaUsuarios");
-        }
-        return id; 
-    }
-    
     public Object mostrarTalleres(){
         try{
             DataRequest = (Statement) Db.createStatement();
@@ -104,5 +90,48 @@ public class ConexionBD {
             c = 2;
         }
         return c;
+    }
+    
+    public int obtenerUserId(String nombre, String nickname){
+        int id = 0;
+        try{
+            DataRequest = Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select id from usuario where nickname = '" + nickname + "' and nombre = '" + nombre + "';");
+            while(Resultado.next()){
+                String id_user = Resultado.getString(1);
+                id = Integer.valueOf(id_user);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex + "buscaUsuarios");
+        }
+        return id; 
+    }
+    
+    public int obtenerIdTaller(String nombre, String lugar, String horario) {
+        int id = 0;
+        try{
+            DataRequest = Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select id from talleres where nombre = '"+nombre+"' and lugar = '"+lugar+"' and horario = '"+horario+"';");
+            while(Resultado.next()){
+                id = Resultado.getInt(1);
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return id;
+    }
+    
+    public DefaultComboBoxModel listMaestros(){
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        try{
+            DataRequest = Db.createStatement();
+            Resultado = DataRequest.executeQuery("Select nombre from usuario, maestro where maestro.usuario_id = usuario.id");
+            while(Resultado.next()){
+                model.addElement(Resultado.getString(1));
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return model;
     }
 }

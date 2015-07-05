@@ -80,8 +80,4 @@ public class DAOMaestro {
         }
         return modeloMaestros;
     }
-
-    public void showM() {
-        JOptionPane.showMessageDialog(null, "hola"); //To change body of generated methods, choose Tools | Templates.
-    }
 }

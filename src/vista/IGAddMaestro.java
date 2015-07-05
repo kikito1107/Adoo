@@ -238,9 +238,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
         String email = txtemail.getText();
         int id= 0;
         dtoMaestro = new DTOMaestro(nombre, nick, pass, rol, telefono, email,clave);
-        //daoMaestro.agregarUsuario(dtoMaestro.getNombre(), dtoMaestro.getNickname(), dtoMaestro.getPassword(), dtoMaestro.getRol(), dtoMaestro.getClave(), dtoMaestro.getTelefono(), dtoMaestro.getCorreo(), id = 0);
         daoMaestro.agregarUsuario(dtoMaestro);
-        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
