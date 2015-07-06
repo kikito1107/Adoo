@@ -40,7 +40,6 @@ public final class IGCoordinador extends javax.swing.JFrame {
     public IGCoordinador() {
         
         initComponents();
-        initTablas();
         tablaTalleresEditable.setVisible(false);
         jLabel6.setVisible(false);
         this.setResizable(false);
@@ -64,6 +63,13 @@ public final class IGCoordinador extends javax.swing.JFrame {
     }
     public void editarTaller(String numero, String taller, String horario, String dias, String profesor, String lugar, String observacion){
         DefaultTableModel modeloTalleresEditable = new DefaultTableModel();
+        modeloTalleresEditable.addColumn("#");
+        modeloTalleresEditable.addColumn("Taller");
+        modeloTalleresEditable.addColumn("Horario");
+        modeloTalleresEditable.addColumn("Dias");
+        modeloTalleresEditable.addColumn("Profesor");
+        modeloTalleresEditable.addColumn("Lugar");
+        modeloTalleresEditable.addColumn("Observación");
         tablaTalleresEditable.setModel(modeloTalleresEditable);
         String []datosTalleres = new String [8];
         datosTalleres[0] = String.valueOf(numero);
@@ -74,6 +80,7 @@ public final class IGCoordinador extends javax.swing.JFrame {
         datosTalleres[5] = lugar;
         datosTalleres[6] = observacion;
         modeloTalleresEditable.addRow(datosTalleres);
+        tablaTalleresEditable.setModel(modeloTalleresEditable);
     }
     
     public DefaultTableModel mostrarMaestros(){
@@ -129,8 +136,6 @@ public final class IGCoordinador extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaMaestros = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -242,37 +247,25 @@ public final class IGCoordinador extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("Eliminar");
-
-        jButton7.setText("Reasignar");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(107, Short.MAX_VALUE)
+                .addContainerGap(123, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7)))
+                    .addComponent(jButton4))
                 .addGap(69, 69, 69))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton7))
+                .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Maestros", jPanel3);
@@ -443,21 +436,21 @@ public final class IGCoordinador extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        /*int obs;
+        int obs, id;
+        id = obj.obtenerIdTaller( tablaTalleresEditable.getValueAt(0,2).toString(), tablaTalleresEditable.getValueAt(0, 3).toString(), tablaTalleresEditable.getValueAt(0, 3).toString());
         if("Electiva".equals(tablaTalleresEditable.getValueAt(0,6))){
             obs = 0;
         }else{
             obs = 1;
         }
         daoTalleres.editarTaller(
-                tablaTalleresEditable.getValueAt(0, 1), 
-                tablaTalleresEditable.getValueAt(0, 2), 
-                tablaTalleresEditable.getValueAt(0, 3), 
-                tablaTalleresEditable.getValueAt(0,5), 
-                null, 
-                null);
+                id, 
+                tablaTalleresEditable.getValueAt(0, 1).toString(), 
+                tablaTalleresEditable.getValueAt(0, 2).toString(), 
+                tablaTalleresEditable.getValueAt(0,3).toString(), 
+                tablaTalleresEditable.getValueAt(0, 5).toString(), 
+                obs);
         daoTalleres.mostrarTalleres();
-        */
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -466,6 +459,7 @@ public final class IGCoordinador extends javax.swing.JFrame {
         addMaestro.setVisible(true);
         addMaestro.setUndecorated(false);
         
+        //tablaTalleres.setModel(daoTalleres.mostrarTalleres());
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -473,6 +467,8 @@ public final class IGCoordinador extends javax.swing.JFrame {
         IGAddTaller addTaller = new IGAddTaller();
         addTaller.setVisible(true);
         addTaller.setUndecorated(false);
+        tablaMaestros.setModel(daoMaestros.mostrarMaestros());
+        tablaTalleres.setModel(daoTalleres.mostrarTalleres());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -522,9 +518,7 @@ public final class IGCoordinador extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;

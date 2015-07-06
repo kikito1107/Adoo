@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import modelo.DAOMaestro;
 import modelo.DTOMaestro;
 
+
 /**
  *
  * @author saul
@@ -229,6 +230,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        boolean ig = true;
         String nombre = txtname.getText();
         String nick = txtnick.getText();
         String pass = txtpass.getText();
@@ -239,6 +241,7 @@ public class IGAddMaestro extends javax.swing.JFrame {
         int id= 0;
         dtoMaestro = new DTOMaestro(nombre, nick, pass, rol, telefono, email,clave);
         daoMaestro.agregarUsuario(dtoMaestro);
+        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

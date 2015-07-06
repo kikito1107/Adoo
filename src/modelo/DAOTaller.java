@@ -58,6 +58,21 @@ public class DAOTaller {
         }
     }
     
+    public void editarTaller(int id, String taller, String horario, String dias, String lugar, int obs){
+        try {
+            PreparedStatement pst = cn.prepareStatement("Update talleres SET nombre='"
+                    + taller +
+                    "', horario='" + horario +
+                    "', dias='" + dias +
+                    "', lugar='" + lugar +
+                    "', observacion='" + obs + "' WHERE id = " + id
+            );
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
     public DefaultTableModel mostrarTalleres(){
         // Inicializamos la tabla de Talleres
         DefaultTableModel modeloTalleres = new DefaultTableModel();
@@ -73,17 +88,19 @@ public class DAOTaller {
         int num = 0;
         try{
             Statement st = cn.createStatement();
-            rs = st.executeQuery("SELECT * FROM talleres");
+            rs = st.executeQuery("SELECT talleres.nombre, talleres.horario, talleres.dias, usuario.nombre, talleres.lugar ,talleres.observacion "
+                    + "           FROM talleres_has_periodo, talleres, maestro ,usuario "
+                    + "           WHERE talleres_has_periodo.talleres_id = talleres.id and talleres_has_periodo.maestro_id = maestro.id and maestro.usuario_id = usuario.id");
             while(rs.next()){
                 num++;
                 String numero = String.valueOf(num);
                 int tipo = Integer.valueOf(rs.getString(6));
                 datosTalleres[0] = numero ;
-                datosTalleres[1] = rs.getString(2);
-                datosTalleres[2] = rs.getString(4);
-                datosTalleres[3] = rs.getString(5);
-                datosTalleres[4] = "aun no";//rs.getString(3);
-                datosTalleres[5] = rs.getString(3);
+                datosTalleres[1] = rs.getString(1);
+                datosTalleres[2] = rs.getString(2);
+                datosTalleres[3] = rs.getString(3);
+                datosTalleres[4] = rs.getString(4);
+                datosTalleres[5] = rs.getString(5);
                 if(tipo == 1){
                     datosTalleres[6] = "Electiva";
                 }else{
@@ -96,20 +113,4 @@ public class DAOTaller {
         }
         return modeloTalleres;
     }
-    
-    
-    /*public void editarTaller(String numero, String taller, String horario, String dias, String profesor, String lugar, String observacion){
-    try {
-        PreparedStatement pst = cn.prepareStatement("Update talleres SET nombre='"
-                + taller +
-                "', horario='" + horario +
-                "', dias='" + dias +
-                "', lugar='" + lugar +
-                "', observacion='" + obs + "' WHERE id = " + tablaTalleresEditable.getValueAt(0,0)
-        );
-        pst.executeUpdate();
-
-    } catch (SQLException ex) {
-        Logger.getLogger(IGCoordinador.class.getName()).log(Level.SEVERE, null, ex);
-    }*/
 }
