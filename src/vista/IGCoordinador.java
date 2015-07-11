@@ -309,9 +309,9 @@ public final class IGCoordinador extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         jLabel9.setText("Escuela Superior de Turismo");
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionelectiva/imagenes/ipn.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ipn.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionelectiva/imagenes/ESTf.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ESTf.png"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 25)); // NOI18N
         jLabel3.setText("INSTITUTO POLITECNICO NACIONAL");

@@ -81,7 +81,7 @@
                           <Component id="jSeparator2" alignment="0" min="-2" pref="338" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="392" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -150,7 +150,7 @@
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/gestionelectiva/imagenes/ipn.png"/>
+          <Image iconType="3" name="/img/ipn.png"/>
         </Property>
       </Properties>
     </Component>
@@ -159,7 +159,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/gestionelectiva/imagenes/ESTf.png"/>
+          <Image iconType="3" name="/img/ESTf.png"/>
         </Property>
       </Properties>
     </Component>
@@ -315,7 +315,7 @@
               <Color blue="ff" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gestionelectiva/imagenes/icon-users_03.png"/>
+              <Image iconType="3" name="/img/icon-users_03.png"/>
             </Property>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
             <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
@@ -330,7 +330,7 @@
               <Color blue="ff" green="66" red="ff" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/gestionelectiva/imagenes/icon-users_05.png"/>
+              <Image iconType="3" name="/img/icon-users_05.png"/>
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="inheritsPopupMenu" type="boolean" value="false"/>

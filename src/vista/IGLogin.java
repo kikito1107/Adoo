@@ -13,18 +13,26 @@ import javax.swing.JOptionPane;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.JLabel;
+import modelo.DAOTaller;
 
 /**
  *
  * @author Saul
  */
 public class IGLogin extends javax.swing.JFrame {
+
+    ConexionBD obj = new ConexionBD();
+    DAOTaller daoTaller = new DAOTaller();
+    public int id;
+    
     /** 
      * Creates new form IniciarSesion
      */
     public IGLogin() {
         initComponents();
         this.getContentPane().setBackground(Color.black);
+        
     }
 
     /**
@@ -163,9 +171,8 @@ public class IGLogin extends javax.swing.JFrame {
         
         String usu = inputUsuario.getText();
         String pass = inputPassword.getText();
-        ConexionBD obj = new ConexionBD();
         obj.conexion();
-        
+        id = obj.obtenerIdVetanaMaestro(usu, pass);
         int val = obj.buscarUsuario(usu, pass);
         
         if(val == 0){
@@ -177,15 +184,13 @@ public class IGLogin extends javax.swing.JFrame {
                 IGCoordinador ventanaCoordinador = new IGCoordinador();
                 ventanaCoordinador.setVisible(true);
                 this.dispose();
-                IGPrincipal ventanaP = new IGPrincipal();
-                ventanaP.dispose();
             }else{
                 if(valRoll == 3 && "Bienvenido Maestro".equals(titleTypeUser.getText())){
-                    IGMaestro ventanaEncargado = new IGMaestro();
-                    ventanaEncargado.setVisible(true);
+                    IGMaestro vMaestro = new IGMaestro();
+                    vMaestro.setVisible(true);
+                    String idM = String.valueOf(id);
+                    vMaestro.entradaMaestro.setText(idM);
                     this.dispose();
-                    IGPrincipal ventanaP = new IGPrincipal();
-                    ventanaP.dispose();
                 }else{
                     this.dispose();
                     JOptionPane.showMessageDialog(null, "Al parecer el tipo de usuario es incorrecto\nvuelva a seleccionar.");

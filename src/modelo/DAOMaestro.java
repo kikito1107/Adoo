@@ -25,6 +25,9 @@ public class DAOMaestro {
     ResultSet rs;
     DTOMaestro maestro;
     
+    public DAOMaestro(){
+        
+    }
     public void agregarUsuario(DTOMaestro maestro) {
         try{
             pstmt = cn.prepareStatement("INSERT INTO usuario (nombre, nickname, password, roll, clabe_interna) VALUES (?,?,?,?,?)");
@@ -53,6 +56,25 @@ public class DAOMaestro {
         }
     }
     
+    public String nombreMaestro(int id){
+        String nombre = null;
+        int usuario;
+        try{
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT usuario_id FROM maestro where id = "+id);
+            while(rs.next()){
+                usuario = rs.getInt(1);
+                Statement st1 = cn.createStatement();
+                ResultSet rs1 = st1.executeQuery("SELECT nombre FROM usuario where id = "+usuario);
+                while(rs1.next()){
+                    nombre = rs1.getString(1);
+                }
+            }
+        }catch(SQLException ex){
+            System.out.println(ex);
+        }
+        return nombre;
+    }
     public DefaultTableModel mostrarMaestros(){
         // Inicializamos la tabla de maestros
         DefaultTableModel modeloMaestros = new DefaultTableModel();

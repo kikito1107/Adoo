@@ -88,9 +88,9 @@ public class IGPrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1100, 900));
         setType(java.awt.Window.Type.POPUP);
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionelectiva/imagenes/ipn.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ipn.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionelectiva/imagenes/ESTf.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/ESTf.png"))); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 25)); // NOI18N
         jLabel3.setText("INSTITUTO POLITECNICO NACIONAL");
@@ -137,13 +137,13 @@ public class IGPrincipal extends javax.swing.JFrame {
 
         jLabel11.setBackground(new java.awt.Color(102, 102, 255));
         jLabel11.setForeground(new java.awt.Color(255, 102, 255));
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionelectiva/imagenes/icon-users_03.png"))); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon-users_03.png"))); // NOI18N
         jLabel11.setRequestFocusEnabled(false);
         jLabel11.setVerifyInputWhenFocusTarget(false);
 
         jLabel12.setBackground(new java.awt.Color(255, 51, 0));
         jLabel12.setForeground(new java.awt.Color(255, 102, 255));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestionelectiva/imagenes/icon-users_05.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icon-users_05.png"))); // NOI18N
         jLabel12.setFocusable(false);
         jLabel12.setInheritsPopupMenu(false);
         jLabel12.setRequestFocusEnabled(false);
@@ -221,7 +221,7 @@ public class IGPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 392, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2))
@@ -275,12 +275,12 @@ public class IGPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
         IGLogin ventanaS = new IGLogin();
         ventanaS.setVisible(true);
         IGLogin.titleTypeUser.setText("Bienvenido Coordinador");
         ventanaS.setLocationRelativeTo(null);
         ventanaS.setUndecorated(true);
-        //this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de coordinador, espere un momento.");
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -292,12 +292,13 @@ public class IGPrincipal extends javax.swing.JFrame {
      * @param evt 
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.setVisible(false);
         IGLogin ventanaS = new IGLogin();
         ventanaS.setVisible(true);
         IGLogin.titleTypeUser.setText("Bienvenido Maestro");
         ventanaS.setLocationRelativeTo(null);
         ventanaS.setUndecorated(true);
-        //this.dispose();
+        this.dispose();
         //JOptionPane.showMessageDialog(null, "Redireccionando a vista de encargado, espere un momento.");
     }//GEN-LAST:event_jButton2ActionPerformed
 

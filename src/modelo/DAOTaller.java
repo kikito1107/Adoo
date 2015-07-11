@@ -73,6 +73,7 @@ public class DAOTaller {
             System.out.println(ex);
         }
     }
+    
     public DefaultTableModel mostrarTalleres(){
         // Inicializamos la tabla de Talleres
         DefaultTableModel modeloTalleres = new DefaultTableModel();
@@ -112,5 +113,32 @@ public class DAOTaller {
             System.out.println(ex);
         }
         return modeloTalleres;
+    }
+
+    public DefaultTableModel mostrarTalleresAsignados(int id) {
+        
+        // Inicializamos la tabla de Talleres Asiganados
+        DefaultTableModel modeloTalleresAsignados = new DefaultTableModel();
+        modeloTalleresAsignados.addColumn("Taller");
+        modeloTalleresAsignados.addColumn("Horario");
+        modeloTalleresAsignados.addColumn("Dias");
+        
+        String []datosTalleres = new String [5];
+        int num = 0;
+        try{
+            Statement st = cn.createStatement();
+            rs = st.executeQuery("SELECT talleres.nombre, talleres.horario, talleres.dias "
+                    + "FROM talleres_has_periodo, talleres "
+                    + "WHERE talleres_has_periodo.talleres_id = talleres.id and maestro_id =" + id);
+            while(rs.next()){
+                datosTalleres[0] = rs.getString(1);
+                datosTalleres[1] = rs.getString(2);
+                datosTalleres[2] = rs.getString(3);
+                modeloTalleresAsignados.addRow(datosTalleres);
+            }
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,ex);
+        }
+        return modeloTalleresAsignados;
     }
 }
