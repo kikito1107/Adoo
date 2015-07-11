@@ -34,6 +34,7 @@ public class IGMaestro extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         PanelAgregarAlumno.setVisible(false);
         entradaMaestro.setVisible(false);
+        jButton4.setVisible(false);
     }
 
     
@@ -182,26 +183,25 @@ public class IGMaestro extends javax.swing.JFrame {
             PanelAgregarAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelAgregarAlumnoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(PanelAgregarAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PanelAgregarAlumnoLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(inNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelAgregarAlumnoLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(18, 18, 18)
-                        .addComponent(inBoleta)))
                 .addGroup(PanelAgregarAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelAgregarAlumnoLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGroup(PanelAgregarAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(PanelAgregarAlumnoLayout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(inNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelAgregarAlumnoLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)
+                                .addComponent(inBoleta)))
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(selectEscuelas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                        .addComponent(selectEscuelas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(PanelAgregarAlumnoLayout.createSequentialGroup()
-                        .addGap(96, 96, 96)
                         .addComponent(jButton5)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         PanelAgregarAlumnoLayout.setVerticalGroup(
             PanelAgregarAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +215,10 @@ public class IGMaestro extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PanelAgregarAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(inBoleta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(inBoleta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -229,15 +230,15 @@ public class IGMaestro extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(PanelAgregarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addContainerGap())))
@@ -250,13 +251,13 @@ public class IGMaestro extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PanelAgregarAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PanelAgregarAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
@@ -373,23 +374,7 @@ public class IGMaestro extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        int fila = tablaTalleresAsignados.getSelectedRow();
         PanelAgregarAlumno.setVisible(true);
-        int id; 
-        if(fila>=0){
-            String taller = tablaTalleresAsignados.getCellRenderer(fila, 1).toString(); 
-            String horario = tablaTalleresAsignados.getCellRenderer(fila, 2).toString();
-            String dias = tablaTalleresAsignados.getCellRenderer(fila, 3).toString();
-            id = obj.obtenerIdTallerDias(taller, horario, dias);
-            
-            JOptionPane.showMessageDialog(null, id);
-            
-            DTOAlumno alumno = new DTOAlumno(inNombre.getText(), inBoleta.getText(), selectEscuelas.getSelectedItem().toString());
-            alumno1 = new DAOAlumno(id,alumno);
-            }else{
-            JOptionPane.showMessageDialog(null,"No se ha selecciono ningún taller.");
-        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void selectEscuelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectEscuelasActionPerformed
@@ -397,7 +382,19 @@ public class IGMaestro extends javax.swing.JFrame {
     }//GEN-LAST:event_selectEscuelasActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        int fila = tablaTalleresAsignados.getSelectedRow();
+        int id; 
+        if(fila>=0){
+            String taller = tablaTalleresAsignados.getValueAt(fila, 0).toString();
+            String horario = tablaTalleresAsignados.getValueAt(fila, 1).toString();
+            String dias = tablaTalleresAsignados.getValueAt(fila, 2).toString();
+            id = obj.obtenerIdTallerDias(taller, horario, dias);
+            String escuela = selectEscuelas.getSelectedItem().toString();
+            DTOAlumno aN = new DTOAlumno(inNombre.getText(), inBoleta.getText(), escuela);
+            alumno1.altaAlumno(aN.getNombre(), aN.getBoleta(), aN.getEscuela(), id);
+        }else{
+             JOptionPane.showMessageDialog(null,"No se ha selecciono nada.");
+        }
        
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -412,22 +409,18 @@ public class IGMaestro extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         int fila = tablaTalleresAsignados.getSelectedRow();
-        PanelAgregarAlumno.setVisible(true);
         int id; 
         if(fila>=0){
-            String taller = tablaTalleresAsignados.getCellRenderer(fila, 1).toString(); 
-            String horario = tablaTalleresAsignados.getCellRenderer(fila, 2).toString();
-            String dias = tablaTalleresAsignados.getCellRenderer(fila, 3).toString();
+            String taller = tablaTalleresAsignados.getValueAt(fila, 0).toString();
+            String horario = tablaTalleresAsignados.getValueAt(fila, 1).toString();
+            String dias = tablaTalleresAsignados.getValueAt(fila, 2).toString();
             id = obj.obtenerIdTallerDias(taller, horario, dias);
-            
-            JOptionPane.showMessageDialog(null, id);
-            
-            DTOAlumno alumno = new DTOAlumno(inNombre.getText(), inBoleta.getText(), selectEscuelas.getSelectedItem().toString());
-            alumno1 = new DAOAlumno(id,alumno);
-            }else{
+            tablaAlumnos.setModel(alumno1.mostrarAlumnos(id));
+            jButton4.setVisible(true);
+        }else{
             JOptionPane.showMessageDialog(null,"No se ha selecciono ningún taller.");
         }
-        tablaAlumnos.setModel(alumno1.mostrarAlumnos());
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

@@ -121,11 +121,11 @@ public class ConexionBD {
         return id;
     }
     
-    public int obtenerIdTallerDias(String nombre, String horario, String dias) {
+    public int obtenerIdTallerDias(String taller, String horario, String dias) {
         int id = 0;
         try{
             DataRequest = Db.createStatement();
-            Resultado = DataRequest.executeQuery("Select id from talleres where nombre = '"+nombre+"' and dias = '"+dias+"' and horario = '"+horario+"';");
+            Resultado = DataRequest.executeQuery("Select id from talleres where nombre = '"+taller+"' and dias = '"+dias+"' and horario = '"+horario+"';");
             while(Resultado.next()){
                 id = Resultado.getInt(1);
             }

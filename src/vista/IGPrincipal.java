@@ -111,7 +111,7 @@ public class IGPrincipal extends javax.swing.JFrame {
         jPanel1.setToolTipText("");
         jPanel1.setName(""); // NOI18N
 
-        jButton1.setText("Aceder");
+        jButton1.setText("Acceder");
         jButton1.setFocusCycleRoot(true);
         jButton1.setVerifyInputWhenFocusTarget(false);
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
